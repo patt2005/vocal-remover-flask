@@ -49,3 +49,7 @@ def get_audio():
     os.remove(vocal_path)
 
     return response
+
+
+if __name__ == "__main__":
+    app.run(port="0.0.0.0")
