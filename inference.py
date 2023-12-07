@@ -12,8 +12,6 @@ from lib import nets
 from lib import spec_utils
 from lib import utils
 
-# C:\Users\petru\Downloads\vocal-remover-develop\OG Buda - Бэйбитрон.mp3
-
 
 class Separator(object):
     def __init__(
@@ -109,20 +107,20 @@ class Separator(object):
         return y_spec, v_spec
 
 
-def main():
+def main(audio_file):
     p = argparse.ArgumentParser()
-    p.add_argument("--gpu", "-g", type=int, default=-1)
+    p.add_argument("--gpu", "-g", type=int, default=0)
     p.add_argument("--pretrained_model", "-P", type=str, default="models/baseline.pth")
-    p.add_argument("--input", "-i", required=True)
+    p.add_argument("--input", "-i", default=audio_file)
     p.add_argument("--sr", "-r", type=int, default=44100)
     p.add_argument("--n_fft", "-f", type=int, default=2048)
     p.add_argument("--hop_length", "-H", type=int, default=1024)
     p.add_argument("--batchsize", "-B", type=int, default=4)
     p.add_argument("--cropsize", "-c", type=int, default=256)
     p.add_argument("--output_image", "-I", action="store_true")
-    p.add_argument("--tta", "-t", action="store_true")
-    p.add_argument("--postprocess", "-p", action="store_true")
-    p.add_argument("--output_dir", "-o", type=str, default="")
+    p.add_argument("--tta", "-t", action="store_true", default="store_true")
+    p.add_argument("--postprocess", "-p", action="store_true", default="store_true")
+    p.add_argument("--output_dir", "-o", type=str, default="outputs/")
     args = p.parse_args()
 
     print("loading model...", end=" ")
