@@ -11,7 +11,7 @@ app.config["OUTPUT_FOLDER"] = "outputs"
 
 @app.route("/", methods=["GET"])
 def run_app():
-    return jsonify({"Page": "Home page"})
+    return "My first Flask app"
 
 
 @app.route("/split/", methods=["POST"])
