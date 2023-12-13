@@ -11,7 +11,7 @@ app.config["OUTPUT_FOLDER"] = "outputs"
 
 @app.route("/", methods=["GET"])
 def run_app():
-    return "My first Flask app"
+    return "Vocal Remover API"
 
 
 @app.route("/split/", methods=["POST"])
@@ -52,4 +52,4 @@ def get_audio():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0")
