@@ -23,7 +23,10 @@ def split_audio():
     file_name = os.path.join(app.config["UPLOAD_FOLDER"], audio_file.filename)
     audio_file.save(file_name)
 
-    inference.main(file_name)
+    try:
+        inference.main(file_name)
+    except:
+        return jsonify({"Status": "Caught an error in inference.py file!"})
 
     os.remove(file_name)
 

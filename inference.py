@@ -107,21 +107,24 @@ class Separator(object):
         return y_spec, v_spec
 
 
+class Args:
+    def __init__(self, audio_file):
+        self.gpu = 0
+        self.pretrained_model = "models/baseline.pth"
+        self.input = audio_file
+        self.sr = 44100
+        self.n_fft = 2048
+        self.hop_length = 1024
+        self.batchsize = 4
+        self.cropsize = 256
+        self.output_image = False
+        self.tta = "store_true"
+        self.postprocess = "store_true"
+        self.output_dir = "outputs/"
+
+
 def main(audio_file):
-    p = argparse.ArgumentParser()
-    p.add_argument("--gpu", "-g", type=int, default=0)
-    p.add_argument("--pretrained_model", "-P", type=str, default="models/baseline.pth")
-    p.add_argument("--input", "-i", default=audio_file)
-    p.add_argument("--sr", "-r", type=int, default=44100)
-    p.add_argument("--n_fft", "-f", type=int, default=2048)
-    p.add_argument("--hop_length", "-H", type=int, default=1024)
-    p.add_argument("--batchsize", "-B", type=int, default=4)
-    p.add_argument("--cropsize", "-c", type=int, default=256)
-    p.add_argument("--output_image", "-I", action="store_true")
-    p.add_argument("--tta", "-t", action="store_true", default="store_true")
-    p.add_argument("--postprocess", "-p", action="store_true", default="store_true")
-    p.add_argument("--output_dir", "-o", type=str, default="outputs/")
-    args = p.parse_args()
+    args = Args(audio_file=audio_file)
 
     print("loading model...", end=" ")
     device = torch.device("cpu")
@@ -186,7 +189,3 @@ def main(audio_file):
 
         image = spec_utils.spectrogram_to_image(v_spec)
         utils.imwrite("{}{}_Vocals.jpg".format(output_dir, basename), image)
-
-
-if __name__ == "__main__":
-    main()
