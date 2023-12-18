@@ -109,7 +109,7 @@ class Separator(object):
 
 class Args:
     def __init__(self, audio_file):
-        self.gpu = 0
+        self.gpu = -1
         self.pretrained_model = "models/baseline.pth"
         self.input = audio_file
         self.sr = 44100
