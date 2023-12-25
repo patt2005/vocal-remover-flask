@@ -36,11 +36,10 @@ def split_audio():
 @app.route("/get/", methods=["GET"])
 def get_audio():
     file_name = str(request.args.get("name"))
-    file_name_without_extension = os.path.splitext(file_name)[0]
-    instrumental_path = f"outputs/{file_name_without_extension}_Instruments.wav"
-    vocal_path = f"outputs/{file_name_without_extension}_Vocals.wav"
+    instrumental_path = f"outputs/{file_name}_Instruments.wav"
+    vocal_path = f"outputs/{file_name}_Vocals.wav"
 
-    zip_filename = f"zip_files/{file_name_without_extension}_audio_files.zip"
+    zip_filename = f"zip_files/{file_name}_audio_files.zip"
 
     with ZipFile(zip_filename, "w") as zip_file:
         zip_file.write(instrumental_path)
